@@ -1,0 +1,19 @@
+{
+    "img" : [
+        {
+            "id": "1",
+            "img": "path" 
+        },
+        {
+            "id": "2",
+            "img": "path" 
+        }
+    ],
+    "imgMini": [
+        {
+            "id": "1",
+            "img": "path",
+            "parentId": "1" 
+        }
+    ]
+}
