@@ -1,51 +1,55 @@
 <template>
-        <div class="info-card-product">
-            <div class="like" @click="isActive= !isActive">
-                <i class="material-icons like_icon" v-if="!isActive">favorite_border</i>
-                <i class="material-icons active_like" v-else>favorite</i>
-            </div>
-            <h2 class="name-brand">Nike</h2>
-            <h1 class="name-model">AIR MAX TAVAS SD</h1>
-            <p class="price-model">$ 160.00</p>
-            <p class="available-color">COLORS - <span>Black/Pink Pow/Tour Yellow/White</span></p>
-                <div class="thumb-card">
-                    <img 
-                        class="chield-img"
-                        v-for="item in dataParent" 
-                        :key="item.id"
-                        :src="item.img"
-                        @click="clickHandler(item.parentId)"
-                    >
-                </div>
-            <p class="text-size">Size chart</p>
-            <div class="wrapper-select-add">
-                <v-select></v-select>
-                <add-cart-btn></add-cart-btn>
-            </div>
+    <div class="info-card-product">
+        <div class="like" @click="likeShow= !likeShow" v-show="likeRemove">
+            <i class="material-icons like_icon" v-if="!likeShow">favorite_border</i>
+            <i class="material-icons active_like" v-else>favorite</i>
         </div>
+        <h2 class="name-brand">Nike</h2>
+        <h1 class="name-model">AIR MAX TAVAS SD</h1>
+        <p class="price-model">$ 160.00</p>
+        <p class="available-color">COLORS - <span>Black/Pink Pow/Tour Yellow/White</span></p>
+            <div class="thumb-card">
+                <img 
+                    class="chield-img"
+                    v-for="item in dataParent" 
+                    :key="item.id"
+                    :src="item.img"
+                    @click="clickHandler(item.id)"
+                >
+            </div>
+        <p class="text-size">Size chart</p>
+        <div class="wrapper-select-add">
+            <custom-select/>
+            <add-cart-btn/>
+        </div>
+    </div>
 </template>
 
 <script>
-import AddCartBtn from './AddCartBtn.vue'
-import VSelect from './VSelect.vue'
+import AddCartBtn from '../../../components/AddCartBtn.vue'
+import CustomSelect from '../../../components/CustomSelect.vue'
+
 
 export default {
+    components: { 
+        AddCartBtn,
+        CustomSelect
+    },
+    data: function() {
+        return{
+            switchStateSideBar: false,
+            likeShow: false,
+            likeRemove: true,
+        }
+    },
     props: {
         dataParent: Array,
         clickHandler: Function,
     },
-    data:function() {
-        return{
-            isActive: false,
-        }
-    },
-    components: { 
-        VSelect, 
-        AddCartBtn,
-    },
-    methods:{
-        animateSlide(active){
-            return this.$store.state.isActive = active
+    mounted(){
+        let like = this.$route.params.productid
+        if (like){
+            this.likeRemove = false
         }
     }
 }

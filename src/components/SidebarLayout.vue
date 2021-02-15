@@ -2,8 +2,8 @@
     <div>
         <transition name="slide-fade">
             <div class="shadow" 
-            v-if="isShow"
-            v-on:click.self="removeBar(false)"
+            v-if="showSidebarLayout"
+            @click.self="removeSideBarLayout()"
             >
                 <div class="sidebar">
                     <div class="form-info">
@@ -16,10 +16,7 @@
                                 <input type="text" placeholder="First name">
                                 <input type="text" placeholder="Second Name">
                             </div>
-                            <div class="custom-select">
-                                <p class="text-contry">Contry</p>
-                                <img src="../ico/arrow.svg">
-                            </div>
+                        <contry-select/>
                         </div>
                         <textarea placeholder="Adress"></textarea>
                         <div class="user-info">
@@ -37,7 +34,7 @@
                             <p class="text-delivery">Delivery mode</p>
                         <div class="custom-select">
                             <p class="price-delivery">Collisimo france, <span>$20.00</span></p>
-                            <img src="../ico/arrow.svg">
+                            <img src="../assets/icons/IconsHeder/arrow.svg">
                         </div>
                     </div>
                     <div class="sidebar-footer-product">
@@ -49,15 +46,20 @@
 </template>
 
 <script>
+import ContrySelect from './ContrySelect.vue'
+
 export default {
+    components: { 
+        ContrySelect 
+    },
     computed:{
-        isShow(){
-            return this.$store.state.isActive
+        showSidebarLayout(){
+            return this.$store.state.showSidebar
         }
     },
     methods:{
-        removeBar(val){
-            this.$store.state.isActive = val
+        removeSideBarLayout(){
+            this.$store.state.showSidebar = false
             document.querySelector('body').style.overflow = 'auto'
         }
     },
@@ -70,6 +72,7 @@ export default {
         background-color: rgba(0,0,0,.6)
         height: 100%
         position: fixed
+        z-index: 45
         width: 100%
         top: 0
         left: 0      
@@ -78,7 +81,6 @@ export default {
         height: 100%
         width: 560px
         position: fixed
-        z-index: 20
         top: 0
         background-color: #FFFFFF
         right: 0
@@ -88,7 +90,7 @@ export default {
         transition: all .3s ease
 
     .slide-fade-leave-active
-        transition: all .10s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+        transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0)
 
     .slide-fade-enter, .slide-fade-leave-to
         transform: translateX(10px)

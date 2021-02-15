@@ -1,0 +1,62 @@
+{
+    "ParentImg":[
+        {
+            "id": 1,
+            "img": "../../../assets/HomeCardImages/img.png"
+        },
+        {
+            "id": 2,
+            "img": "../../../assets/HomeCardImages/img.png"
+        },
+        {
+            "id": 3,
+            "img": "../../../assets/HomeCardImages/img.png"
+        },
+        {
+            "id": 4,
+            "img": "../../../assets/HomeCardImages/img.png"
+        },
+        {
+            "id": 5,
+            "img": "../../../assets/HomeCardImages/img.png"
+        },
+        {
+            "id": 6,
+            "img": "../../../assets/HomeCardImages/img.png"
+        }
+    ],
+    "rightChieldImg": [
+        {
+            "id": 1,
+            "img": "../../../assets/icons/IconsHomeCard/preview-nike-color.svg",
+            "parentId": 1
+        },
+        {
+            "id": 2,
+            "img": "../../../assets/icons/IconsHomeCard/preview-nike-filter.svg",
+            "parentId": 2
+        }
+    ],
+    "subChieldImg": [
+        {
+            "id": 1,
+            "subImg": "../../../assets/icons/IconsHomeCard/preview-nike-filter.svg",
+            "parentId": 2
+        },
+        {
+            "id": 2,
+            "subImg": "../../../assets/icons/IconsHomeCard/preview-nike-filter.svg",
+            "parentId": 1
+        },   
+        {
+            "id": 2,
+            "subImg": "../../../assets/icons/IconsHomeCard/preview-nike-filter.svg",
+            "parentId": 1
+        },
+        {
+            "id": 2,
+            "subImg": "../../../assets/icons/IconsHomeCard/preview-nike-filter.svg",
+            "parentId": 1
+        }
+    ]
+}

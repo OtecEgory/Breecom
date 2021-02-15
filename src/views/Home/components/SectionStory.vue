@@ -51,19 +51,19 @@
                         <span class="available-color">
                             Black/Pink Pow/Tour Yellow/White
                         </span>
-                        <img src="../assets/card-img.png" alt="">
+                        <img src="../../../assets/CardImages/Nike-color-card.png" alt="">
                         <div class="wrap-components">
                             <div class="select-sizes">
                                 <p class="text-stock">
                                     En stock
                                 </p>
-                                <v-select></v-select>
+                                <custom-select/>
                             </div>
                             <div class="add-btn">
                                 <p class="price">
                                     $160.00
                                 </p>
-                                <add-cart-btn></add-cart-btn>
+                                <add-cart-btn/>
                             </div>
                         </div>
                     </div>
@@ -74,22 +74,22 @@
 </template>
 
 <script>
-import AddCartBtn from './AddCartBtn.vue'
-import VSelect from './VSelect.vue'
+import AddCartBtn from '../../../components/AddCartBtn.vue'
+import CustomSelect from '../../../components/CustomSelect.vue'
 
 export default {
-  components: { VSelect, AddCartBtn },
-
-
+    components: {
+        AddCartBtn, 
+        CustomSelect 
+    },
 }
 </script>
 
 <style lang="sass">
 
-
     div.bkg-story-model
         position: relative
-        background-image: url('../assets/Viewfromabove.png')
+        background-image: url('../../../assets/BckgImages/Viewfromabove.png')
         background-repeat: no-repeat
         background-size: cover
 
@@ -210,6 +210,5 @@ export default {
         div.wrap-components
             display: flex
             justify-content: space-between
-
 
 </style>

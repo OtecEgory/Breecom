@@ -16,16 +16,11 @@
     </section>
 </template>
 
-<script>
-export default {
-    
-}
-</script>
-
 <style lang="sass">
+
     div.bkg-about-model
         margin-top: 160px
-        background-image: url('../assets/BgAboutModel.png')
+        background-image: url('../../../assets/BckgImages/BgAboutModel.png')
         background-position: 100% 65%
         background-repeat: no-repeat
         background-size: cover
@@ -59,4 +54,5 @@ export default {
             color: #666666
             color: #FFFFFF
             line-height: 25px
+            
 </style>

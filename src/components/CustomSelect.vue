@@ -2,18 +2,18 @@
     <div class="v-select">
         <div 
             class="result-size"
-            v-on:click="show = !show"
+            v-on:click="showListSize = !showListSize"
         >
-            {{selectedSize}}
-            <img class="select-arrow" src="../../src/ico/arrow.svg" alt="">
+        {{defaultLableSize}}
+            <img class="select-arrow" src="../assets/icons/IconsHeder/arrow.svg">
         </div>
         <transition name="fade">
-            <div class="list-size" v-if="show">
+            <div class="list-size" v-if="showListSize">
                 <p 
                     class="v-option"
                     v-for=" size in sizes" 
                     :key="size.name"
-                    @click="insertSize(size.name)"
+                    @click="insertSizeHeadSelect(size.name)"
                 >
                 {{size.name}}
                 </p>
@@ -23,12 +23,11 @@
 </template>
 
 <script>
-
 export default {
     data: function() {
         return  { 
-            show: false,
-            selectedSize:'Size',
+            showListSize: false,
+            defaultLableSize:'Size',
             sizes:[
                 {
                     name: 'EU 40.5'
@@ -49,10 +48,10 @@ export default {
         }
     },
     methods: {
-        insertSize(nameSize){
+        insertSizeHeadSelect(nameSize){
             this.$root.$data.sizes
-            this.selectedSize = nameSize
-            this.show = false
+            this.defaultLableSize = nameSize
+            this.showListSize = false
         },
     },
 }

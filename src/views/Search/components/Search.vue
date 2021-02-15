@@ -1,42 +1,36 @@
 <template>
     <div>
         <transition name="slide-fade">
-            <div class="search-layout"  v-if="isActiveSearchLayout">
-                <header-bree></header-bree>
-                <div class="wrap-galery-card">
-                    <v-gallery-aside v-if="isVisible"></v-gallery-aside>
-                        <transition name="slide-fade">
-                        <one-section v-if="isVisible"></one-section>
-                    </transition>
-                </div>
+            <div class="search-layout" v-if="showSearchLayout">
+                <header-bree/>
                 <div class="container">
-                    <div class="searsh-wrap" v-if="remove">
+                    <div class="searsh-wrap">
                         <div class="search-content">
                             <div class="search-group-text">
                                 <p class="text-search">Search on Bree</p>
                                 <p class="text-typing">Start typing</p>
                             </div>
-                            <div class="close-search-layout" v-on:click="removeSearchLayout(false)">
-                                <img src="../assets/ico/icon-close.svg">
+                            <div class="close-search-layout" @click="removeSearchLayout()">
+                                <img src="../../../assets/icons/IconsSearch/icon-close.svg">
                             </div>
                         </div>
                         <div class="search-product">
                             <input type="text" class="search" v-model="searchValue">
                             <div class="loop">
-                                <img class="ico-search" src="../assets/ico/icon-search.svg">
+                                <img class="ico-search" src="../../../assets/icons/IconsSearch/icon-search.svg">
                             </div>
                         </div>
-                        <p class="available-goods">Footwear <span>({{lengthItems}})</span></p>
+                        <p class="available-goods">Footwear<span>({{lengthItemProduct}})</span></p>
                         <div class="card-product">
                             <div class="item-card"
-                                @click="removeSearch(false), openCardProduct(true)"
-                                v-for="model in searchFilter"
-                                :key="model.id"
+                                v-for="itemData in searchFilterProduct"
+                                :key="itemData.id"
+                                @click="$router.push(`/product/${itemData.id}`)"
                                 >
-                                <img :src="model.img">
-                                <p class="brand">{{model.brand}}</p>
-                                <p class="about-model">{{model.aboutModel}}</p>
-                                <p class="price">{{model.price}}</p>
+                                <img :src="require('../../../assets/CardImages/Nike-color-card.png')">
+                                <p class="brand">{{itemData.brand.name}}</p>
+                                <p class="about-model">{{itemData.brand.info}}</p>
+                                <p class="price">{{itemData.price}}</p>
                             </div>
                         </div>
                     </div>
@@ -47,77 +41,38 @@
 </template>
 
 <script>
-import HeaderBree from './HeaderBree.vue'
-import OneSection from './OneSection.vue'
-import VGalleryAside from './VGalleryAside.vue'
-
+import {сards} from '../../../api/service'
+import HeaderBree from '../../../components/HeaderBree.vue'
 
 export default {
-  components: { HeaderBree ,OneSection, VGalleryAside },
+    components: { 
+        HeaderBree,
+    },
     data: function() {
         return{
+            dataInfo: null,
             searchValue: '',
-            isVisible: false,
-            remove: true,
-            models:[
-                {   
-                    id: '1',
-                    img: require('../assets/Raf-simons-x-adidas.png'),
-                    brand: 'Raf Simons x adidas',
-                    aboutModel:'Mid - Platform Light-Up',
-                    price:'$760.00'
-
-                },
-                {   
-                    id: '2',
-                    img: require('../assets/Raf-simons-white.png'),
-                    brand: 'Raf Simons x adidas',
-                    aboutModel:'Stan smith classic',
-                    price:'$300.00'
-
-                },
-                {   
-                    id: '3',
-                    img: require('../assets/Nike-color-card.png'),
-                    brand: 'Raf Simons',
-                    aboutModel:'Hi top velcro straps',
-                    price:'$788.00'
-
-                },
-                {   
-                    id: '4',
-                    img: require('../assets/Raf-simons-green.png'),
-                    brand: 'Raf Simons',
-                    aboutModel:'Hi top velcro straps',
-                    price:'$788.00'
-
-                },
-            ]
         }
     },
     computed:{
-        isActiveSearchLayout(){
-            return this.$store.state.isShow
+        showSearchLayout(){
+            return this.$store.state.isVisibleSearch
         },
-        searchFilter(){
-            return this.models.filter(item => item.brand ? item.brand.toLowerCase().includes(this.searchValue.toLowerCase()) : false)
-            
+        searchFilterProduct(){
+            return this.dataInfo.filter(item => item.name ? item.name.toLowerCase().includes(this.searchValue.toLowerCase()) : false)
         },
-        lengthItems(){
-            return this.searchFilter.length
+        lengthItemProduct(){
+            return this.searchFilterProduct.length
         }
     },
     methods:{
-        removeSearchLayout(disactive){
-            this.$store.state.isShow = disactive
+        removeSearchLayout(){
+            this.$store.state.isVisibleSearch = false
             document.querySelector('body').style.overflow = 'auto'
         },
-        removeSearch(remove){
-            this.remove = remove
-        },
-        openCardProduct(open){
-            this.isVisible = open
-        }
+    },
+    mounted(){
+        сards().then(response => (this.dataInfo = response.data))
     }
 }
 </script>
@@ -133,12 +88,13 @@ export default {
         background-color: #e6edf1
         right: 0
         box-shadow: 0 0 10px rgba(0,0,0,0.5)
+        overflow: auto
 
     .slide-fade-enter-active
-        transition: all .6s ease
+        transition: all .9s ease
 
     .slide-fade-leave-active
-        transition: all .6s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+        transition: all .9s cubic-bezier(1.0, 0.5, 0.8, 1.0)
 
     .slide-fade-enter, .slide-fade-leave-to
         transform: translateX(30px)
@@ -165,7 +121,8 @@ export default {
         height: 430px
         width: 280px
         cursor: pointer
-        &:nth-child(4)
+        margin-bottom: 20px
+        &:nth-of-type(4n+4)
             margin-right: 0
         img
             display: flex
