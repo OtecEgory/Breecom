@@ -2,7 +2,7 @@
     <header>
         <div class="headroom-wrapper">
             <div class="nav-item-left">
-                <img src="../../src/ico/logo-header.svg">
+                <img src="../assets/icons/IconsHeder/logo-header.svg">
                 <ul class="list-left">
                     <li>
                         <a href="#">Footwear</a>
@@ -24,22 +24,22 @@
             <div class="nav-item-right">
                 <ul class="list-right">
                     <li @click="showSearchLayout(true)">
-                        <img class="ico" src="../../src/ico/loop.svg">
+                        <img class="ico" src="../assets/icons/IconsHeder/loop.svg">
                         <a href="#">
                             Search
                         </a>
                     </li>
-                    <li @click="showBar(true)">
-                        <img class="ico" src="../../src/ico/basket.svg" >
+                    <li @click="showSidebarLayout(true)">
+                        <img class="ico" src="../assets/icons/IconsHeder/basket.svg" >
                         <a href="#">
                             Cart
                         </a>
                         <span class="counter">
-                            ({{counter}})
+                            ({{quantityProduct}})
                         </span>
                     </li>
                     <li>
-                        <img class="ico" src="../../src/ico/sign-in.svg">
+                        <img class="ico" src="../assets/icons/IconsHeder/sign-in.svg">
                         <a href="#">
                             Sing in
                         </a>
@@ -53,20 +53,17 @@
 <script>
 export default {
     computed:{
-        counter(){
-            return this.$store.state.counter
+        quantityProduct(){
+            return this.$store.state.quantity
         },
-        isShow(){
-            return this.$store.state.isShow
-        }
     },
     methods:{
-        showBar(val){
-            this.$store.state.isActive = val
+        showSidebarLayout(){
+            this.$store.state.showSidebar = true
             document.querySelector('body').style.overflow = 'hidden'
         },
-        showSearchLayout(arg){
-            this.$store.state.isShow = arg
+        showSearchLayout(){
+            this.$store.state.isVisibleSearch = true
             document.querySelector('body').style.overflow = 'hidden'
         }
     },

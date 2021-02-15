@@ -1,6 +1,6 @@
 <template>
     <div class="add-product-cart">
-        <button v-on:click="updateCounter(1)" class="add-cart">ADD TO CART</button>
+        <button @click="addProductQuantity(1)" class="add-cart">ADD TO CART</button>
     </div>
 </template>
 
@@ -12,8 +12,8 @@ export default {
         }
     },
     methods :{
-        updateCounter(val){
-            this.$store.state.counter +=val
+        addProductQuantity(addQuantity){
+            this.$store.state.quantity += addQuantity
         },
     }
 }

@@ -9,12 +9,12 @@ export default new Vuex.Store({
     mutations:{},
 
     state:{
-        counter:0,
-        isActive: false,
-        isShow: false,
-        isVisible: true,
+        quantity:0,
+        isVisibleSearch: false,
+        showSidebar: false,
     },
 
     getters: {},
+
     modules:{},
 })
